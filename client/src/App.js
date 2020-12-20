@@ -5,6 +5,7 @@ import "./App.css";
 // components
 import LogInStudent from "./components/LogInStudent";
 import ListStudents from "./components/ListStudents";
+import ListWorkstations from "./components/ListWorkstations";
 import LibraryPage from "./components/LibraryPage";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                 <Switch>
                     <Route path="/" exact component={LogInStudent} />
                     <Route path="/list" component={ListStudents} />
+                    <Route path="/workstations" component={ListWorkstations} />
                     <Route path="/library" component={LibraryPage} />
                 </Switch>
             </div>
