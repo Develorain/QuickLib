@@ -10,7 +10,7 @@ import LibraryPage from "./components/LibraryPage";
 function App() {
     return (
         <Router>
-            <div className="App-header">
+            <div className="App">
                 <Switch>
                     <Route path="/" exact component={LogInStudent} />
                     <Route path="/list" component={ListStudents} />
