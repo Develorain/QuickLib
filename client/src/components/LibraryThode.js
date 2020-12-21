@@ -1,6 +1,6 @@
 import React, {Fragment, useState, useEffect} from "react";
 
-const ListWorkstations = () => {
+const LibraryThode = () => {
     useEffect(() => {
         fetchItems();
     }, []);
@@ -17,13 +17,11 @@ const ListWorkstations = () => {
 
     return (
         <Fragment>
-            <h1>ListWorkstations</h1>
+            <h1>Thode Workstations</h1>
 
             {items.map(item => (
                 <div>
-                    <h1 key={item.workstation_id}>{item.host_name}</h1>
-                    <h1 key={item.workstation_id}>{item.student_name}</h1>
-                    <h1 key={item.workstation_id}>{item.status}</h1>
+                    <h4 key={item.workstation_id}>{item.host_name} {item.student_name} {item.status}</h4>
                 </div>
             ))}
 
@@ -31,12 +29,4 @@ const ListWorkstations = () => {
     );
 };
 
-export default ListWorkstations;
-
-//<h1>{items.host_name}</h1>
-
-/*
-{items.map(item => {
-    <h1>{item.item.}</h1>
-})}
-*/
+export default LibraryThode;

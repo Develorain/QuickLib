@@ -2,21 +2,24 @@ import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import "./App.css";
 
-// components
 import LogInStudent from "./components/LogInStudent";
 import ListStudents from "./components/ListStudents";
-import ListWorkstations from "./components/ListWorkstations";
-import LibraryPage from "./components/LibraryPage";
+import SelectLibrary from "./components/SelectLibrary";
+import LibraryThode from "./components/LibraryThode";
+import LibraryMills from "./components/LibraryMills";
+import LibraryInnis from "./components/LibraryInnis";
 
 function App() {
     return (
         <Router>
             <div className="App">
                 <Switch>
-                    <Route path="/" exact component={LogInStudent} />
-                    <Route path="/list" component={ListStudents} />
-                    <Route path="/workstations" component={ListWorkstations} />
-                    <Route path="/library" component={LibraryPage} />
+                    <Route path="/" exact component={LogInStudent}/>
+                    <Route path="/library" component={SelectLibrary}/>
+                    <Route path="/thode" component={LibraryThode}/>
+                    <Route path="/mills" component={LibraryMills}/>
+                    <Route path="/innis" component={LibraryInnis}/>
+                    <Route path="/students" component={ListStudents}/>
                 </Switch>
             </div>
         </Router>

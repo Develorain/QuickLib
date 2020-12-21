@@ -1,4 +1,5 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useState, useEffect} from "react";
+import {withRouter} from "react-router-dom";
 
 const LogInStudent = () => {
     const [name, setName] = useState("");
@@ -6,19 +7,18 @@ const LogInStudent = () => {
     const onLogInForm = async e => {
         e.preventDefault();
 
+        console.log(withRouter.history);
+
         try {
             const response = await fetch("http://localhost:5000/students");
             const jsonData = await response.json();
 
-            //console.log(jsonData);
-
-            var flag = false;
+            var studentExists = false;
             for (var i = 0; i < jsonData.length; i++) {
                 if (jsonData[i].name === name) {
-                    flag = true;
+                    studentExists = true;
                 }
             }
-            console.log(flag);
         } catch (err) {
             console.error(err.message);
         }

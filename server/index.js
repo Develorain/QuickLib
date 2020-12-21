@@ -32,6 +32,52 @@ app.get("/thode", async(req, res) => {
     }
 });
 
+// create a workstation at mills
+app.post("/mills", async(req, res) => {
+    try {
+        console.log(req.body);
+        const {host_name, student_name, status} = req.body;
+        const newWorkstation = await pool.query("INSERT INTO mills (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
+
+        res.json(newWorkstation.rows[0]);
+    } catch (e) {
+        console.error(e.message);
+    }
+});
+
+// get all workstations at mills
+app.get("/mills", async(req, res) => {
+    try {
+        const allWorkstations = await pool.query("SELECT * FROM mills");
+        res.json(allWorkstations.rows);
+    } catch (e) {
+        console.error(e.message);
+    }
+});
+
+// create a workstation at innis
+app.post("/innis", async(req, res) => {
+    try {
+        console.log(req.body);
+        const {host_name, student_name, status} = req.body;
+        const newWorkstation = await pool.query("INSERT INTO innis (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
+
+        res.json(newWorkstation.rows[0]);
+    } catch (e) {
+        console.error(e.message);
+    }
+});
+
+// get all workstations at innis
+app.get("/innis", async(req, res) => {
+    try {
+        const allWorkstations = await pool.query("SELECT * FROM innis");
+        res.json(allWorkstations.rows);
+    } catch (e) {
+        console.error(e.message);
+    }
+});
+
 // create a student
 app.post("/students", async(req, res) => {
     try {

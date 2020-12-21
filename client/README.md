@@ -3,7 +3,12 @@
 2. Navigate to server folder. Run nodemon index.
 3. Navigate to client folder. Run npm start.
 
+Database Commands:
 psql -U postgres
+\l
+\c quicklib_database
+\dt
+SELECT * FROM student;
 
 CREATE TABLE thode(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));
 INSERT INTO thode (host_name, student_name, status) VALUES ('THODEF1D001', 'Ahmad', 'Occupied');
