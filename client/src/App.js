@@ -5,20 +5,24 @@ import "./App.css";
 import LogInStudent from "./components/LogInStudent";
 import ListStudents from "./components/ListStudents";
 import SelectLibrary from "./components/SelectLibrary";
-import LibraryThode from "./components/LibraryThode";
-import LibraryMills from "./components/LibraryMills";
-import LibraryInnis from "./components/LibraryInnis";
+import Library from "./components/Library";
 
 function App() {
     return (
         <Router>
             <div className="App">
                 <Switch>
-                    <Route path="/" exact component={LogInStudent}/>
-                    <Route path="/library" component={SelectLibrary}/>
-                    <Route path="/thode" component={LibraryThode}/>
-                    <Route path="/mills" component={LibraryMills}/>
-                    <Route path="/innis" component={LibraryInnis}/>
+                    <Route path="/" exact component={SelectLibrary}/>
+                    <Route path="/login" component={LogInStudent}/>
+                    <Route path="/thode">
+                        <Library library="Thode"/>
+                    </Route>
+                    <Route path="/mills">
+                        <Library library="Mills"/>
+                    </Route>
+                    <Route path="/innis">
+                        <Library library="Innis"/>
+                    </Route>
                     <Route path="/students" component={ListStudents}/>
                 </Switch>
             </div>

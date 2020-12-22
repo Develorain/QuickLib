@@ -16,11 +16,11 @@ class SelectLibrary extends Component {
                     <p>Select a library to book at</p>
 
                     <div id="container">
-                        <button onClick={(e) => this.handleClick(e)}>Thode</button>
+                        <button className="libraryButton" onClick={(e) => this.handleClick(e)}>Thode</button>
                         <div className="divider"/>
-                        <button onClick={(e) => this.handleClick(e)}>Mills</button>
+                        <button className="libraryButton" onClick={(e) => this.handleClick(e)}>Mills</button>
                         <div className="divider"/>
-                        <button onClick={(e) => this.handleClick(e)}>Innis</button>
+                        <button className="libraryButton" onClick={(e) => this.handleClick(e)}>Innis</button>
                     </div>
                 </div>
         );

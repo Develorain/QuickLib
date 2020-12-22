@@ -12,7 +12,6 @@ app.use(express.json()); //req.body
 // create a workstation at thode
 app.post("/thode", async(req, res) => {
     try {
-        console.log(req.body);
         const {host_name, student_name, status} = req.body;
         const newWorkstation = await pool.query("INSERT INTO thode (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
 
@@ -35,7 +34,6 @@ app.get("/thode", async(req, res) => {
 // create a workstation at mills
 app.post("/mills", async(req, res) => {
     try {
-        console.log(req.body);
         const {host_name, student_name, status} = req.body;
         const newWorkstation = await pool.query("INSERT INTO mills (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
 
@@ -58,7 +56,6 @@ app.get("/mills", async(req, res) => {
 // create a workstation at innis
 app.post("/innis", async(req, res) => {
     try {
-        console.log(req.body);
         const {host_name, student_name, status} = req.body;
         const newWorkstation = await pool.query("INSERT INTO innis (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
 

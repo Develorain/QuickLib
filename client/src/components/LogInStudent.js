@@ -3,6 +3,7 @@ import {withRouter} from "react-router-dom";
 
 const LogInStudent = () => {
     const [name, setName] = useState("");
+    const [verified, setVerified] = useState("false");
 
     const onLogInForm = async e => {
         e.preventDefault();
@@ -19,6 +20,12 @@ const LogInStudent = () => {
                     studentExists = true;
                 }
             }
+
+            if (studentExists) {
+                setVerified("true");
+            } else {
+                setVerified("false");
+            }
         } catch (err) {
             console.error(err.message);
         }
@@ -26,10 +33,11 @@ const LogInStudent = () => {
 
     return (
         <Fragment>
-            <h1>Welcome to QuickLib</h1>
+            <h1>Log In</h1>
             <form onSubmit={onLogInForm}>
                 <input type="text" value={name} onChange={e => setName(e.target.value)}/>
                 <button>Log In</button>
+                <h4>{verified}</h4>
             </form>
         </Fragment>
     );
