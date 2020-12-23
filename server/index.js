@@ -21,14 +21,16 @@ app.get("/:var(monday|tuesday|wednesday|thursday|friday)", async(req, res) => {
     }
 });
 
-app.put("/monday", async(req, res) => {
+app.put("/:var(monday|tuesday|wednesday|thursday|friday)", async(req, res) => {
     try {
+        const url = req.url.replace("/", "");
         const {host_name, time, student_name, status} = req.body;
         console.log("host_name", host_name, typeof(host_name));
         console.log("time", time, typeof(time));
         console.log("student_name", student_name, typeof(student_name));
         console.log("status", status, typeof(status));
-        const updateWorkstation = await pool.query("UPDATE monday SET student_name=$1, status=$2 WHERE host_name=$3 AND time=$4", [student_name, status, host_name, time]);
+        console.log("UPDATE ".concat(url, " SET student_name=$1, status=$2 WHERE host_name=$3 AND time=$4"), [student_name, status, host_name, time]);
+        const updateWorkstation = await pool.query("UPDATE ".concat(url, " SET student_name=$1, status=$2 WHERE host_name=$3 AND time=$4"), [student_name, status, host_name, time]);
         res.json("Workstation was updated!");
     } catch (e) {
         console.error(e.message);

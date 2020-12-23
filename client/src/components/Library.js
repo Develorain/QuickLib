@@ -91,6 +91,20 @@ class LibraryThode extends Component {
                     <option value="Occupied">Occupied</option>
                 </select>
 
+                <label>Name</label>
+                <input type="text"/>
+
+                <label>Time (temp)</label>
+                <input type="text"/>
+
+                <label>Student ID</label>
+                <input type="text"/>
+
+                <label>Host Name (temp)</label>
+                <input type="text"/>
+
+                <button>Reserve</button>
+
                 {this.state.displayedItems.map(item => (
                     <div>
                         <Workstation workstation_id={item.workstation_id} host_name={item.host_name} time={item.time} student_name={item.student_name} status={item.status}/>
