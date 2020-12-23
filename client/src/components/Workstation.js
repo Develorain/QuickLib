@@ -8,7 +8,7 @@ class Workstation extends Component {
     render() {
         return (
             <div>
-                <h4 key={this.props.workstation_id}>{this.props.host_name} {this.props.student_name} {this.props.status}</h4>
+                <h4 key={this.props.workstation_id}>{this.props.host_name} {this.props.time} {this.props.student_name} {this.props.status}</h4>
             </div>
         );
     }

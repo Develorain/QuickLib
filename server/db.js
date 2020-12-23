@@ -5,7 +5,7 @@ const pool = new Pool({
     password: "Uncrackablepass1",
     host: "localhost",
     port: 5432,
-    database: "quicklib_database"
+    database: "thode"
 });
 
 module.exports = pool;

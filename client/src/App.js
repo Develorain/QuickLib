@@ -15,13 +15,7 @@ function App() {
                     <Route path="/" exact component={SelectLibrary}/>
                     <Route path="/login" component={LogInStudent}/>
                     <Route path="/thode">
-                        <Library library="Thode"/>
-                    </Route>
-                    <Route path="/mills">
-                        <Library library="Mills"/>
-                    </Route>
-                    <Route path="/innis">
-                        <Library library="Innis"/>
+                        <Library/>
                     </Route>
                     <Route path="/students" component={ListStudents}/>
                 </Switch>

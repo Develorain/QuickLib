@@ -6,14 +6,13 @@
 Database Commands:
 psql -U postgres
 \l
-\c quicklib_database
+\c thode
 \dt
 SELECT * FROM student;
 
 CREATE TABLE thode(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));
-INSERT INTO thode (host_name, student_name, status) VALUES ('THODEF1D001', 'Ahmad', 'Occupied');
+INSERT INTO monday (host_name, time, student_name, status) VALUES ('THODEF1D002', '10', 'Yassen', 'Occupied');
 DELETE FROM thode WHERE student_name='';
-
 
 # Getting Started with Create React App
 
