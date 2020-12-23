@@ -1,0 +1,29 @@
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '9', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '10', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '11', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '12', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '1', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '2', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '3', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '4', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '5', '', 'Available');
+
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '9', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '10', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '11', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '12', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '1', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '2', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '3', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '4', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D002', '5', '', 'Available');
+
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '9', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '10', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '11', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '12', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '1', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '2', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '3', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '4', '', 'Available');
+INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D003', '5', '', 'Available');

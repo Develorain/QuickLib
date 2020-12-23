@@ -26,7 +26,6 @@ class LibraryThode extends Component {
         const response = await fetch(address);
         const items = await response.json();
 
-        console.log("items:", items);
         this.setState({items: items});
     }
 
@@ -52,21 +51,11 @@ class LibraryThode extends Component {
         var status = this.state.selectedStatus;
         var items = this.state.items;
         var temp = [];
-        
-        /*
-        var day = this.state.selectedDay;
-        console.log("day", day);
-        console.log("time", time);
-        console.log("status", status);
-        console.log("items", items);
-        */
         items.forEach(async function(entry) {
             if (entry.status === status && time === entry.time) {
                 temp.push(entry);
             }
         });
-        
-        //console.log("temp", temp);
 
         await this.setState({displayedItems: temp});
     }
