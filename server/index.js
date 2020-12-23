@@ -9,32 +9,12 @@ app.use(express.json()); //req.body
 
 // Routes //
 
-// create a workstation at thode
-app.post("/thode", async(req, res) => {
+// THODE //
+// get all workstations on monday in thode
+app.get("/:var(monday|tuesday|wednesday|thursday|friday)", async(req, res) => {
     try {
-        const {host_name, student_name, status} = req.body;
-        const newWorkstation = await pool.query("INSERT INTO thode (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
-
-        res.json(newWorkstation.rows[0]);
-    } catch (e) {
-        console.error(e.message);
-    }
-});
-
-// get all workstations on monday
-app.get("/monday", async(req, res) => {
-    try {
-        const allWorkstations = await pool.query("SELECT * FROM monday");
-        res.json(allWorkstations.rows);
-    } catch (e) {
-        console.error(e.message);
-    }
-});
-
-// get all workstations on tuesday
-app.get("/tuesday", async(req, res) => {
-    try {
-        const allWorkstations = await pool.query("SELECT * FROM tuesday");
+        const url = req.url.replace("/", "");
+        const allWorkstations = await pool.query("SELECT * FROM ".concat(url));
         res.json(allWorkstations.rows);
     } catch (e) {
         console.error(e.message);
@@ -52,6 +32,20 @@ app.post("/students", async(req, res) => {
         console.error(e.message);
     }
 });
+
+/*
+// create a workstation at thode
+app.post("/thode", async(req, res) => {
+    try {
+        const {host_name, student_name, status} = req.body;
+        const newWorkstation = await pool.query("INSERT INTO thode (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
+
+        res.json(newWorkstation.rows[0]);
+    } catch (e) {
+        console.error(e.message);
+    }
+});
+*/
 
 // get all students
 app.get("/students", async(req, res) => {

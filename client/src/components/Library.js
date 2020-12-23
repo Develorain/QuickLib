@@ -26,6 +26,7 @@ class LibraryThode extends Component {
 
     async fetchWorkstations(day) {
         const address = "http://localhost:5000/".concat(day);
+        console.log("address:", address);
         const response = await fetch(address);
         const items = await response.json();
 
@@ -34,17 +35,13 @@ class LibraryThode extends Component {
 
     async handleDay(e) {
         await this.setState({selectedDay: e.target.value});
-
-        console.log("BEFORE", this.state.selectedDay);
         this.fetchWorkstations(this.state.selectedDay);
-        console.log("AFTER", this.state.selectedDay);
     }
 
     async handleTime(e) {
         await this.setState({selectedTime: e.target.value});
-        console.log("SELECTED TIME: ", this.state.selectedTime);
 
-        var temp = []
+        var temp = [];
 
         this.state.items.forEach(function(entry) {
             if (entry.time === e.target.value) {
@@ -64,6 +61,9 @@ class LibraryThode extends Component {
                     <option value="none">None</option>
                     <option value="monday">Monday</option>
                     <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
                 </select>
 
                 <select defaultValue={this.state.selectedTime} onChange={this.handleTime}>
@@ -71,6 +71,11 @@ class LibraryThode extends Component {
                     <option value="9">9-10</option>
                     <option value="10">10-11</option>
                     <option value="11">11-12</option>
+                    <option value="12">12-1</option>
+                    <option value="1">1-2</option>
+                    <option value="2">2-3</option>
+                    <option value="3">3-4</option>
+                    <option value="4">4-5</option>
                 </select>
 
                 {this.state.displayedItems.map(item => (
