@@ -10,8 +10,8 @@ psql -U postgres
 \dt
 SELECT * FROM student;
 
-CREATE TABLE friday(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), time VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));
-INSERT INTO friday(host_name, time, student_name, status) VALUES('THODEF1D001', '3', 'Oscar', 'Occupied');
+CREATE TABLE monday(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), time VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));
+INSERT INTO monday(host_name, time, student_name, status) VALUES('THODEF1D001', '9', 'Milly', 'Occupied');
 DELETE FROM thode WHERE student_name='';
 
 # Getting Started with Create React App

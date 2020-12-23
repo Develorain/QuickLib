@@ -10,19 +10,15 @@ class LibraryThode extends Component {
             items: [],
             displayedItems: [],
             selectedDay: "none",
-            selectedTime: "none"
+            selectedTime: "none",
+            selectedStatus: "none"
         };
         
         this.fetchWorkstations = this.fetchWorkstations.bind(this);
         this.handleDay = this.handleDay.bind(this);
         this.handleTime = this.handleTime.bind(this);
+        this.handleStatus = this.handleStatus.bind(this);
     }
-
-    /*
-    componentDidMount() {
-        this.fetchWorkstations("monday");
-    }
-    */
 
     async fetchWorkstations(day) {
         const address = "http://localhost:5000/".concat(day);
@@ -30,27 +26,49 @@ class LibraryThode extends Component {
         const response = await fetch(address);
         const items = await response.json();
 
+        console.log("items:", items);
         this.setState({items: items});
     }
 
     async handleDay(e) {
         await this.setState({selectedDay: e.target.value});
-        this.fetchWorkstations(this.state.selectedDay);
+        await this.fetchWorkstations(this.state.selectedDay);
+
+        this.update();
     }
 
     async handleTime(e) {
         await this.setState({selectedTime: e.target.value});
+        this.update();
+    }
 
+    async handleStatus(e) {
+        await this.setState({selectedStatus: e.target.value});
+        this.update();
+    }
+
+    async update() {
+        var time = this.state.selectedTime;
+        var status = this.state.selectedStatus;
+        var items = this.state.items;
         var temp = [];
-
-        this.state.items.forEach(function(entry) {
-            if (entry.time === e.target.value) {
-                console.log(entry);
+        
+        /*
+        var day = this.state.selectedDay;
+        console.log("day", day);
+        console.log("time", time);
+        console.log("status", status);
+        console.log("items", items);
+        */
+        items.forEach(async function(entry) {
+            if (entry.status === status && time === entry.time) {
                 temp.push(entry);
             }
         });
+        
+        //console.log("temp", temp);
 
-        this.setState({displayedItems: temp});
+        await this.setState({displayedItems: temp});
     }
 
     render() {
@@ -76,6 +94,12 @@ class LibraryThode extends Component {
                     <option value="2">2-3</option>
                     <option value="3">3-4</option>
                     <option value="4">4-5</option>
+                </select>
+
+                <select defaultValue={this.state.selectedStatus} onChange={this.handleStatus}>
+                    <option value="none">None</option>
+                    <option value="Available">Available</option>
+                    <option value="Occupied">Occupied</option>
                 </select>
 
                 {this.state.displayedItems.map(item => (
