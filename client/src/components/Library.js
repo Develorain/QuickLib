@@ -1,4 +1,5 @@
 import React, {Component, Fragment, useState, useEffect} from "react";
+import Reserve from "./Reserve";
 
 import Workstation from "./Workstation";
 
@@ -11,22 +12,44 @@ class LibraryThode extends Component {
             displayedItems: [],
             selectedDay: "none",
             selectedTime: "none",
-            selectedStatus: "none"
+            selectedStatus: "none",
         };
         
         this.fetchWorkstations = this.fetchWorkstations.bind(this);
         this.handleDay = this.handleDay.bind(this);
         this.handleTime = this.handleTime.bind(this);
         this.handleStatus = this.handleStatus.bind(this);
+
+        this.handleReserve = this.handleReserve.bind(this);
     }
 
     async fetchWorkstations(day) {
         const address = "http://localhost:5000/".concat(day);
-        console.log("address:", address);
         const response = await fetch(address);
         const items = await response.json();
 
         this.setState({items: items});
+    }
+
+    async handleReserve(e) {
+        e.preventDefault();
+        try {
+            var day = this.state.selectedDay;
+            const address = "http://localhost:5000/monday";
+            /*
+            const body = {host_name};
+            
+            const response = await fetch(address, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            });
+            */
+
+            console.log("hi");
+        } catch (err) {
+            console.error(err.message);
+        }
     }
 
     async handleDay(e) {
@@ -91,26 +114,13 @@ class LibraryThode extends Component {
                     <option value="Occupied">Occupied</option>
                 </select>
 
-                <label>Name</label>
-                <input type="text"/>
-
-                <label>Time (temp)</label>
-                <input type="text"/>
-
-                <label>Student ID</label>
-                <input type="text"/>
-
-                <label>Host Name (temp)</label>
-                <input type="text"/>
-
-                <button>Reserve</button>
+                <Reserve/>
 
                 {this.state.displayedItems.map(item => (
                     <div>
                         <Workstation workstation_id={item.workstation_id} host_name={item.host_name} time={item.time} student_name={item.student_name} status={item.status}/>
                     </div>
                 ))}
-
             </Fragment>
         );
     }

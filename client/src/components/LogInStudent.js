@@ -14,6 +14,9 @@ const LogInStudent = () => {
             const response = await fetch("http://localhost:5000/students");
             const jsonData = await response.json();
 
+            const body = {name};
+            console.log(body);
+
             var studentExists = false;
             for (var i = 0; i < jsonData.length; i++) {
                 if (jsonData[i].name === name) {
