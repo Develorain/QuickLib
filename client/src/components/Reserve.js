@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from "react";
 import {withRouter} from "react-router-dom";
 
-const Reserve = () => {
+const Reserve = (props) => {
     const [studentName, setStudentName] = useState("");
     const [hostName, setHostName] = useState("");
     const [time, setTime] = useState("");
@@ -9,6 +9,8 @@ const Reserve = () => {
 
     const onReserve = async e => {
         e.preventDefault();
+
+        console.log("PROPS: ", props.propsTime);
 
         try {
             //var day = this.state.selectedDay;

@@ -16,11 +16,6 @@ class LibraryThode extends Component {
         };
         
         this.fetchWorkstations = this.fetchWorkstations.bind(this);
-        this.handleDay = this.handleDay.bind(this);
-        this.handleTime = this.handleTime.bind(this);
-        this.handleStatus = this.handleStatus.bind(this);
-
-        this.handleReserve = this.handleReserve.bind(this);
     }
 
     async fetchWorkstations(day) {
@@ -29,44 +24,6 @@ class LibraryThode extends Component {
         const items = await response.json();
 
         this.setState({items: items});
-    }
-
-    async handleReserve(e) {
-        e.preventDefault();
-        try {
-            var day = this.state.selectedDay;
-            const address = "http://localhost:5000/monday";
-            /*
-            const body = {host_name};
-            
-            const response = await fetch(address, {
-                method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(body)
-            });
-            */
-
-            console.log("hi");
-        } catch (err) {
-            console.error(err.message);
-        }
-    }
-
-    async handleDay(e) {
-        await this.setState({selectedDay: e.target.value});
-        await this.fetchWorkstations(this.state.selectedDay);
-
-        this.update();
-    }
-
-    async handleTime(e) {
-        await this.setState({selectedTime: e.target.value});
-        this.update();
-    }
-
-    async handleStatus(e) {
-        await this.setState({selectedStatus: e.target.value});
-        this.update();
     }
 
     async update() {
@@ -87,7 +44,12 @@ class LibraryThode extends Component {
         return (
             <Fragment>
                 <h1>Workstations</h1>
-                <select defaultValue={this.state.selectedDay} onChange={this.handleDay}>
+                <select defaultValue={this.state.selectedDay} onChange={async e => {
+                    await this.setState({selectedDay: e.target.value});
+                    await this.fetchWorkstations(this.state.selectedDay);
+
+                    this.update();
+                }}>
                     <option value="none">None</option>
                     <option value="monday">Monday</option>
                     <option value="tuesday">Tuesday</option>
@@ -96,7 +58,10 @@ class LibraryThode extends Component {
                     <option value="friday">Friday</option>
                 </select>
 
-                <select defaultValue={this.state.selectedTime} onChange={this.handleTime}>
+                <select defaultValue={this.state.selectedTime} onChange={async e => {
+                    await this.setState({selectedTime: e.target.value});
+                    this.update();
+                }}>
                     <option value="none">None</option>
                     <option value="9">9-10</option>
                     <option value="10">10-11</option>
@@ -108,18 +73,19 @@ class LibraryThode extends Component {
                     <option value="4">4-5</option>
                 </select>
 
-                <select defaultValue={this.state.selectedStatus} onChange={this.handleStatus}>
+                <select defaultValue={this.state.selectedStatus} onChange={async e => {
+                    await this.setState({selectedStatus: e.target.value});
+                    this.update();
+                }}>
                     <option value="none">None</option>
                     <option value="Available">Available</option>
                     <option value="Occupied">Occupied</option>
                 </select>
 
-                <Reserve/>
+                <Reserve propsTime="9"/>
 
                 {this.state.displayedItems.map(item => (
-                    <div>
-                        <Workstation workstation_id={item.workstation_id} host_name={item.host_name} time={item.time} student_name={item.student_name} status={item.status}/>
-                    </div>
+                    <Workstation workstation_id={item.workstation_id} host_name={item.host_name} time={item.time} student_name={item.student_name} status={item.status}/>
                 ))}
             </Fragment>
         );
