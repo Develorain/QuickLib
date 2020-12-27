@@ -1,9 +1,10 @@
-import React, {Component, Fragment, useState, useEffect} from "react";
-import Reserve from "./Reserve";
+import React, {Component, Fragment} from "react";
+import ReserveMenu from "./ReserveMenu";
 
 import Workstation from "./Workstation";
+import DayTimeStatusSelector from "./DayTimeStatusSelector";
 
-class LibraryThode extends Component {
+class Library extends Component {
     constructor(props) {
         super(props);
 
@@ -12,14 +13,34 @@ class LibraryThode extends Component {
             displayedItems: [],
             selectedDay: "none",
             selectedTime: "none",
-            selectedStatus: "none",
+            selectedStatus: "none"
         };
-        
-        this.fetchWorkstations = this.fetchWorkstations.bind(this);
+
+        this.handleDay = this.handleDay.bind(this);
+        this.handleTime = this.handleTime.bind(this);
+        this.handleStatus = this.handleStatus.bind(this);
     }
 
-    async fetchWorkstations(day) {
-        const address = "http://localhost:5000/".concat(day);
+    async handleDay(e) {
+        await this.setState({selectedDay: e.target.value});
+        await this.fetchWorkstations();
+
+        this.update();
+    }
+
+    async handleTime(e) {
+        await this.setState({selectedTime: e.target.value});
+        this.update();
+    }
+
+    async handleStatus(e) {
+        await this.setState({selectedStatus: e.target.value});
+        this.update();
+    }
+    
+    async fetchWorkstations() {
+        const address = "http://localhost:5000/".concat(this.state.selectedDay);
+        console.log(address);
         const response = await fetch(address);
         const items = await response.json();
 
@@ -27,9 +48,9 @@ class LibraryThode extends Component {
     }
 
     async update() {
+        var items = this.state.items;
         var time = this.state.selectedTime;
         var status = this.state.selectedStatus;
-        var items = this.state.items;
         var temp = [];
         items.forEach(async function(entry) {
             if (entry.status === status && time === entry.time) {
@@ -44,52 +65,20 @@ class LibraryThode extends Component {
         return (
             <Fragment>
                 <h1>Workstations</h1>
-                <select defaultValue={this.state.selectedDay} onChange={async e => {
-                    await this.setState({selectedDay: e.target.value});
-                    await this.fetchWorkstations(this.state.selectedDay);
 
-                    this.update();
-                }}>
-                    <option value="none">None</option>
-                    <option value="monday">Monday</option>
-                    <option value="tuesday">Tuesday</option>
-                    <option value="wednesday">Wednesday</option>
-                    <option value="thursday">Thursday</option>
-                    <option value="friday">Friday</option>
-                </select>
-
-                <select defaultValue={this.state.selectedTime} onChange={async e => {
-                    await this.setState({selectedTime: e.target.value});
-                    this.update();
-                }}>
-                    <option value="none">None</option>
-                    <option value="9">9-10</option>
-                    <option value="10">10-11</option>
-                    <option value="11">11-12</option>
-                    <option value="12">12-1</option>
-                    <option value="1">1-2</option>
-                    <option value="2">2-3</option>
-                    <option value="3">3-4</option>
-                    <option value="4">4-5</option>
-                </select>
-
-                <select defaultValue={this.state.selectedStatus} onChange={async e => {
-                    await this.setState({selectedStatus: e.target.value});
-                    this.update();
-                }}>
-                    <option value="none">None</option>
-                    <option value="Available">Available</option>
-                    <option value="Occupied">Occupied</option>
-                </select>
-
-                <Reserve propsTime="9"/>
+                <DayTimeStatusSelector handleDay={this.handleDay} handleTime={this.handleTime} handleStatus={this.handleStatus}
+                 selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime} selectedStatus={this.state.selectedStatus}/>
+                
+                <ReserveMenu selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}/>
 
                 {this.state.displayedItems.map(item => (
-                    <Workstation workstation_id={item.workstation_id} host_name={item.host_name} time={item.time} student_name={item.student_name} status={item.status}/>
+                    <div key={item.workstation_id}>
+                        <Workstation workstation_id={item.workstation_id} host_name={item.host_name} time={item.time} student_name={item.student_name} status={item.status}/>
+                    </div>
                 ))}
             </Fragment>
         );
     }
 };
 
-export default LibraryThode;
+export default Library;

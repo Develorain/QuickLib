@@ -3,6 +3,8 @@
 2. Navigate to server folder. Run nodemon index.
 3. Navigate to client folder. Run npm start.
 
+npm install react-bootstrap bootstrap
+
 Database Commands:
 psql -U postgres
 \l

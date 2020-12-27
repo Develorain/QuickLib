@@ -1,20 +1,16 @@
-import React, {Fragment, useState, useEffect} from "react";
-import {withRouter} from "react-router-dom";
+import React, {Fragment, useState} from "react";
 
-const Reserve = (props) => {
+const ReserveMenu = (props) => {
     const [studentName, setStudentName] = useState("");
     const [hostName, setHostName] = useState("");
-    const [time, setTime] = useState("");
     const [status, setStatus] = useState("");
+    const [time, setTime] = useState("");
 
     const onReserve = async e => {
         e.preventDefault();
 
-        console.log("PROPS: ", props.propsTime);
-
         try {
-            //var day = this.state.selectedDay;
-            const address = "http://localhost:5000/monday";
+            const address = "http://localhost:5000/".concat(this.props.selectedDay);
             const body = {hostName, time, studentName, status};
             console.log(body);
             
@@ -36,8 +32,8 @@ const Reserve = (props) => {
                 <label>Name</label>
                 <input type="text" value={studentName} onChange={e => setStudentName(e.target.value)}/>
 
-                <label>Time (temp)</label>
-                <input type="text" value={time} onChange={e => setTime(e.target.value)}/>
+                <label>Time (useless)</label>
+                <input type="text" value={props.selectedTime}/>
 
                 <label>Host Name (temp)</label>
                 <input type="text" value={hostName} onChange={e => setHostName(e.target.value)}/>
@@ -54,4 +50,4 @@ const Reserve = (props) => {
     );
 };
 
-export default Reserve;
+export default ReserveMenu;

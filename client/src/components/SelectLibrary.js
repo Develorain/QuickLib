@@ -1,10 +1,6 @@
 import React, {Component} from "react";
 
 class SelectLibrary extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     handleClick = (e) => {
         console.log(e.target.innerHTML);
     }
