@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Modal, Button} from "react-bootstrap";
+import {Modal, Button, Form} from "react-bootstrap";
 
 import 'bootswatch/dist/darkly/bootstrap.css';
 
@@ -11,12 +11,27 @@ const ReserveWorkstation = (props) => {
 
     const reserveWorkstation = async () => {
         try {
-            await console.log(props.workstation_id);
+            const address = "http://localhost:5000/".concat(props.selectedDay);
+            console.log(address);
+            console.log(props.workstationID);
+            console.log(props.hostName);
+            console.log(props.time);
+            console.log(props.reserveName);
+            console.log(props.status);
+            
+            const body = {hostName: props.hostName, time: props.time, reserveName: props.reserveName};
+            console.log("BODY ",body);
+            handleClose();
+            const response = await fetch(address, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            });
+
+            console.log("Response", response);
         } catch (err) {
             console.error(err.message);
         }
-
-        handleClose();
     }
     
     return (
@@ -29,12 +44,13 @@ const ReserveWorkstation = (props) => {
                 <Modal.Header closeButton>
                 <Modal.Title>Confirm Reservation</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to reserve {props.host_name} at {props.time}?</Modal.Body>
+                <Modal.Body>Are you sure you want to reserve {props.hostName} at {props.time}?</Modal.Body>
+
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={() => reserveWorkstation(props.workstation_id)}>
+                <Button variant="primary" onClick={() => reserveWorkstation(props.workstationID)}>
                     Reserve
                 </Button>
                 </Modal.Footer>
@@ -45,4 +61,3 @@ const ReserveWorkstation = (props) => {
 
 //render(<ReserveWorkstation/>);
 export default ReserveWorkstation;
-//<h4>{this.props.host_name} {this.props.time} {this.props.student_name} {this.props.status}</h4>

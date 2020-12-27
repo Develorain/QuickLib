@@ -21,23 +21,41 @@ app.get("/:var(monday|tuesday|wednesday|thursday|friday)", async(req, res) => {
     }
 });
 
-// update workstation
+// reserve workstation
 app.put("/:var(monday|tuesday|wednesday|thursday|friday)", async(req, res) => {
     try {
         const url = req.url.replace("/", "");
-        const {hostName, time, studentName, status} = req.body;
+        const {hostName, time, reserveName} = req.body;
+
+        const updateWorkstation = await pool.query("UPDATE ".concat(url, " SET student_name=$1, status=$2 WHERE host_name=$3 AND time=$4"), [reserveName, "Occupied", hostName, time]);
+        
+        /*
         console.log("hostName", hostName, typeof(hostName));
         console.log("time", time, typeof(time));
         console.log("studentName", studentName, typeof(studentName));
         console.log("status", status, typeof(status));
         console.log("UPDATE ".concat(url, " SET student_name=$1, status=$2 WHERE host_name=$3 AND time=$4"), [studentName, status, hostName, time]);
-        const updateWorkstation = await pool.query("UPDATE ".concat(url, " SET student_name=$1, status=$2 WHERE host_name=$3 AND time=$4"), [studentName, status, hostName, time]);
         res.json("Workstation was updated!");
         console.log("Workstation was updated!");
+        */
     } catch (e) {
         console.error(e.message);
     }
 });
+
+/*
+// create a workstation at thode
+app.post("/thode", async(req, res) => {
+    try {
+        const {host_name, student_name, status} = req.body;
+        const newWorkstation = await pool.query("INSERT INTO thode (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
+
+        res.json(newWorkstation.rows[0]);
+    } catch (e) {
+        console.error(e.message);
+    }
+});
+*/
 
 /*
 // update a student
@@ -65,20 +83,6 @@ app.post("/students", async(req, res) => {
         console.error(e.message);
     }
 });
-
-/*
-// create a workstation at thode
-app.post("/thode", async(req, res) => {
-    try {
-        const {host_name, student_name, status} = req.body;
-        const newWorkstation = await pool.query("INSERT INTO thode (host_name, student_name, status) VALUES($1, $2, $3) RETURNING *", [host_name, student_name, status]);
-
-        res.json(newWorkstation.rows[0]);
-    } catch (e) {
-        console.error(e.message);
-    }
-});
-*/
 
 // get all students
 app.get("/students", async(req, res) => {

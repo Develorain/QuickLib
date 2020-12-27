@@ -1,4 +1,7 @@
 import React, {Fragment, useState} from "react";
+import {Form, Button} from "react-bootstrap";
+
+import 'bootswatch/dist/darkly/bootstrap.min.css';
 
 const ReserveMenu = (props) => {
     const [studentName, setStudentName] = useState("");
@@ -28,22 +31,20 @@ const ReserveMenu = (props) => {
 
     return (
         <Fragment>
-            <form onSubmit={onReserve}>
-                <label>Name</label>
-                <input type="text" value={studentName} onChange={e => setStudentName(e.target.value)}/>
+            <Form onSubmit={onReserve}>
+            <Form.Group controlId="exampleForm.ControlInput1">
+                <Form.Label>Name</Form.Label>
+                <Form.Control type="text" placeholder="John" value={studentName} onChange={e => setStudentName(e.target.value)}/>
+                <Form.Label>Time</Form.Label>
+                <Form.Control type="text" placeholder="9" value={props.selectedTime}/>
+                <Form.Label>Host Name</Form.Label>
+                <Form.Control type="text" placeholder="THODEF1D001" value={hostName} onChange={e => setHostName(e.target.value)}/>
+                <Form.Label>Status</Form.Label>
+                <Form.Control type="text" placeholder="Occupied" value={status} onChange={e => setStatus(e.target.value)}/>
+            </Form.Group>
 
-                <label>Time (useless)</label>
-                <input type="text" value={props.selectedTime}/>
-
-                <label>Host Name (temp)</label>
-                <input type="text" value={hostName} onChange={e => setHostName(e.target.value)}/>
-
-                <label>Status (temp)</label>
-                <input type="text" value={status} onChange={e => setStatus(e.target.value)}/>
-
-                <button>Reserve</button>
-            </form>
-
+            <Button>Reserve</Button>
+            </Form>
             <h2>{studentName}</h2>
             <h2>{hostName}</h2>
         </Fragment>

@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from "react";
-import ReserveMenu from "./ReserveMenu";
+import {Form} from "react-bootstrap";
+
+import 'bootswatch/dist/darkly/bootstrap.min.css';
 
 import Workstation from "./Workstation";
 import DayTimeStatusSelector from "./DayTimeStatusSelector";
@@ -13,12 +15,14 @@ class Library extends Component {
             displayedItems: [],
             selectedDay: "none",
             selectedTime: "none",
-            selectedStatus: "none"
+            selectedStatus: "none",
+            reserveName: ""
         };
 
         this.handleDay = this.handleDay.bind(this);
         this.handleTime = this.handleTime.bind(this);
         this.handleStatus = this.handleStatus.bind(this);
+        this.handleReserveName = this.handleReserveName.bind(this);
     }
 
     async handleDay(e) {
@@ -36,6 +40,10 @@ class Library extends Component {
     async handleStatus(e) {
         await this.setState({selectedStatus: e.target.value});
         this.update();
+    }
+
+    async handleReserveName(e) {
+        await this.setState({reserveName: e.target.value});
     }
     
     async fetchWorkstations() {
@@ -66,14 +74,18 @@ class Library extends Component {
             <Fragment>
                 <h1>Workstations</h1>
 
+                <Form.Group controlId="exampleForm.ControlInput1">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" placeholder="John" onChange={this.handleReserveName}/>
+                </Form.Group>
+
                 <DayTimeStatusSelector handleDay={this.handleDay} handleTime={this.handleTime} handleStatus={this.handleStatus}
                  selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime} selectedStatus={this.state.selectedStatus}/>
-                
-                <ReserveMenu selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime}/>
 
                 {this.state.displayedItems.map(item => (
-                    <div key={item.workstation_id}>
-                        <Workstation workstation_id={item.workstation_id} host_name={item.host_name} time={item.time} student_name={item.student_name} status={item.status}/>
+                    <div key={item.workstationID}>
+                        <Workstation workstationID={item.workstation_id} hostName={item.host_name} time={item.time} studentName={item.student_name} 
+                        reserveName={this.state.reserveName} status={item.status} selectedDay={this.state.selectedDay}/>
                     </div>
                 ))}
             </Fragment>
@@ -82,3 +94,4 @@ class Library extends Component {
 };
 
 export default Library;
+// value={studentName} onChange={e => setStudentName(e.target.value)}
