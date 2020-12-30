@@ -2,26 +2,20 @@ import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import "./App.css";
 
-import LogInStudent from "./components/LogInStudent";
-import ListStudents from "./components/ListStudents";
-import SelectLibrary from "./components/SelectLibrary";
+import StudentLogInPane from "./components/StudentLogInPane";
+import LibrarySelectionPane from "./components/LibrarySelectionPane";
 import Library from "./components/Library";
 
-function App() {
+export default function App() {
     return (
         <Router>
             <div className="App">
                 <Switch>
-                    <Route path="/" exact component={SelectLibrary}/>
-                    <Route path="/login" component={LogInStudent}/>
-                    <Route path="/thode">
-                        <Library/>
-                    </Route>
-                    <Route path="/students" component={ListStudents}/>
+                    <Route path="/" exact><LibrarySelectionPane/></Route>
+                    <Route path="/login"><StudentLogInPane/></Route>
+                    <Route path="/thode"><Library/></Route>
                 </Switch>
             </div>
         </Router>
     );
 }
-
-export default App;

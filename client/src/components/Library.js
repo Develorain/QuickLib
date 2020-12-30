@@ -1,12 +1,11 @@
 import React, {Component, Fragment} from "react";
 import {Form} from "react-bootstrap";
-
 import 'bootswatch/dist/darkly/bootstrap.min.css';
 
 import Workstation from "./Workstation";
-import DayTimeStatusSelector from "./DayTimeStatusSelector";
+import WorkstationFilterPane from "./WorkstationFilterPane";
 
-class Library extends Component {
+export default class Library extends Component {
     constructor(props) {
         super(props);
 
@@ -25,40 +24,42 @@ class Library extends Component {
         this.handleReserveName = this.handleReserveName.bind(this);
     }
 
-    async handleDay(e) {
+    handleDay = async e => {
         await this.setState({selectedDay: e.target.value});
         await this.fetchWorkstations();
 
         this.update();
     }
 
-    async handleTime(e) {
+    handleTime = async e => {
         await this.setState({selectedTime: e.target.value});
         this.update();
     }
 
-    async handleStatus(e) {
+    handleStatus = async e => {
         await this.setState({selectedStatus: e.target.value});
         this.update();
     }
 
-    async handleReserveName(e) {
+    handleReserveName = async e => {
         await this.setState({reserveName: e.target.value});
     }
     
-    async fetchWorkstations() {
+    fetchWorkstations = async () => {
         const address = "http://localhost:5000/".concat(this.state.selectedDay);
-        console.log(address);
         const response = await fetch(address);
         const items = await response.json();
+        
+        console.log(address); // debug
 
         this.setState({items: items});
     }
 
-    async update() {
+    update = async () => {
         var items = this.state.items;
         var time = this.state.selectedTime;
         var status = this.state.selectedStatus;
+
         var temp = [];
         items.forEach(async function(entry) {
             if (entry.status === status && time === entry.time) {
@@ -79,8 +80,8 @@ class Library extends Component {
                     <Form.Control type="text" placeholder="John" onChange={this.handleReserveName}/>
                 </Form.Group>
 
-                <DayTimeStatusSelector handleDay={this.handleDay} handleTime={this.handleTime} handleStatus={this.handleStatus}
-                 selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime} selectedStatus={this.state.selectedStatus}/>
+                <WorkstationFilterPane handleDay={this.handleDay} handleTime={this.handleTime} handleStatus={this.handleStatus}
+                    selectedDay={this.state.selectedDay} selectedTime={this.state.selectedTime} selectedStatus={this.state.selectedStatus}/>
 
                 {this.state.displayedItems.map(item => (
                     <div key={item.workstationID}>
@@ -92,6 +93,3 @@ class Library extends Component {
         );
     }
 };
-
-export default Library;
-// value={studentName} onChange={e => setStudentName(e.target.value)}
