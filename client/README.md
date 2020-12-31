@@ -6,19 +6,14 @@
 npm install react-bootstrap bootstrap
 
 # Database Commands
-psql -U postgres \
-\l \
-\c thode \
-\dt \
-SELECT * FROM student;
-
-CREATE TABLE monday(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), time VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));\
-INSERT INTO monday(host_name, time, student_name, status) VALUES('THODEF1D001', '9', 'Milly', 'Occupied');\
-DELETE FROM thode WHERE student_name='';
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Login to database: psql -U postgres
+2. List all the databases: \l
+3. Select a database: \c thode
+4. List all the tables in a selected database: \dt
+5. List all the entries in a table: SELECT * FROM tableName;
+6. Create table: CREATE TABLE monday(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), time VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));
+7. Insert entry into table: INSERT INTO monday(host_name, time, student_name, status) VALUES('THODEF1D001', '9', 'Milly', 'Occupied');
+8. Delete entries from table: DELETE FROM thode WHERE student_name='';
 
 ## Available Scripts
 
