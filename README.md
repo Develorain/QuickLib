@@ -7,8 +7,6 @@
 1. `nodemon index` in server terminal.
 2. `npm start` in the client terminal.
 
-npm install react-bootstrap bootstrap
-
 # Database Commands
 1. Login to database: psql -U postgres
 2. List all the databases: \l
