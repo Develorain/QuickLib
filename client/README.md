@@ -1,7 +1,11 @@
+# Setup
+1. Open two terminals, one in the server folder, and one in the client folder.
+2. `npm install` in both terminals.
+3. Create a PostgreSQL database using the queries found in server/database.txt.
+
 # Usage
-1. Open two terminals.
-2. Navigate to server folder. Run `nodemon index`
-3. Navigate to client folder. Run `npm start`
+1. `nodemon index` in server terminal.
+2. `npm start` in the client terminal.
 
 npm install react-bootstrap bootstrap
 
