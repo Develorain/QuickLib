@@ -15,7 +15,9 @@
 5. List all the entries in a table: SELECT * FROM tableName;
 6. Create table: CREATE TABLE monday(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), time VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));
 7. Insert entry into table: INSERT INTO monday(host_name, time, student_name, status) VALUES('THODEF1D001', '9', 'Milly', 'Occupied');
-8. Delete entries from table: DELETE FROM thode WHERE student_name='';
+8. Update entries from table: UPDATE wednesday SET student_name='', status='Available' where host_name='THODEF1D001';
+9. Delete entries from table: DELETE FROM thode WHERE student_name='';
+10. Delete table: DROP TABLE monday;
 
 ## Available Scripts
 
