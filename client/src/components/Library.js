@@ -31,33 +31,26 @@ export default class Library extends Component {
 
     handleDay = async e => {
         await this.setState({selectedDay: e.target.value});
-        // await this.fetchWorkstationsNew();
-        // console.log(this.state.selectedDay);
-        // console.log(this.state.items);
-
-        // this.update();
     }
 
     handleTime = async e => {
         await this.setState({selectedTime: e.target.value});
-        // this.update();
     }
 
     handleStatus = async e => {
         await this.setState({selectedStatus: e.target.value});
-        // this.update();
     }
 
     handleSubmit = async e => {
         e.preventDefault();
 
         console.log("SUBMIT CLICKED");
-        await this.fetchWorkstationsNew();
+        await this.fetchWorkstations();
     }
     
     // http://localhost:5000/gets/getworkstations?reserved=true&library_name=thode&reservation_time=9&reservation_day=monday
-    fetchWorkstationsNew = async () => {
-        var libraryName = "thode";
+    fetchWorkstations = async () => {
+        var libraryName = "thode"; // temporarily hard coded to thode for now for simplicity of implementation
         var reservationDay = this.state.selectedDay;
         var reservationTime = this.state.selectedTime;
         var reserved;
@@ -69,47 +62,15 @@ export default class Library extends Component {
         }
 
         const address = "http://localhost:5000/gets/getworkstations?reserved="+reserved+"&library_name="+libraryName+"&reservation_time="+reservationTime+"&reservation_day="+reservationDay;
-        console.log("addr: " + address);
+        // console.log("addr: " + address);
         const response = await fetch(address);
-        console.log("resp: " + response);
+        // console.log("resp: " + response);
         const items = await response.json();
-        console.log("itms: " + items);
-
-        console.log(address);
-        console.log(items);
+        // console.log("itms: " + items);
+        // console.log(address);
+        // console.log(items);
         
         this.setState({items: items});
-    }
-    
-    // fetchWorkstations = async () => {
-    //     const address = "http://localhost:5000/".concat(this.state.selectedDay);
-    //     const response = await fetch(address);
-    //     const items = await response.json();
-        
-    //     console.log(address); // debug
-
-    //     this.setState({items: items});
-    // }
-
-    // pretty sure this whole function is useless now
-    update = async () => {
-        var items = this.state.items;
-        var time = this.state.selectedTime;
-        var status = this.state.selectedStatus;
-
-        var temp = [];
-        items.forEach(async function(entry) {
-            if (time === entry.time) { //entry.status === status && 
-                temp.push(entry);
-            }
-        });
-
-        console.log("pog23232");
-        console.log(items);
-        console.log(time);
-        console.log(status);
-
-        await this.setState({displayedItems: items});  //displayedItems: temp
     }
 
     render() {
@@ -130,19 +91,6 @@ export default class Library extends Component {
                         <Workstation workstationName={item.workstation_name}/>
                     </div>
                 ))}
-
-                {/* {this.state.displayedItems.map(item => (
-                    <div key={item.workstation_name}>
-                        <Workstation workstationName={item.workstation_name}/>
-                    </div>
-                ))} */}
-                
-                {/* {this.state.displayedItems.map(item => (
-                    <div key={item.workstationID}>
-                        <Workstation workstationID={item.workstation_id} hostName={item.host_name} time={item.time} studentName={item.student_name} 
-                        reserveName={this.state.reserveName} status={item.status} selectedDay={this.state.selectedDay}/>
-                    </div>
-                ))} */}
             </Fragment>
         );
     }
