@@ -1,0 +1,29 @@
+CREATE TABLE library(library_name VARCHAR(30) PRIMARY KEY);
+CREATE TABLE workstation(workstation_name VARCHAR(30) PRIMARY KEY, library_name VARCHAR(30) REFERENCES library (library_name) NOT NULL);
+CREATE TABLE usr(usr_id SERIAL PRIMARY KEY, usr_name VARCHAR(30) NOT NULL, workstation_name VARCHAR(30) REFERENCES workstation (workstation_name), reservation_time INT, reservation_day VARCHAR(30));
+
+INSERT INTO library(library_name) VALUES('thode');
+INSERT INTO library(library_name) VALUES('mills');
+INSERT INTO library(library_name) VALUES('innis');
+
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D001', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D002', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D003', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D004', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D005', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D006', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D007', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D008', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('THODEF1D009', 'thode');
+INSERT INTO workstation(workstation_name, library_name) VALUES('MILLSF1D001', 'mills');
+
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Tom', 'THODEF1D001', 9, 'monday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Andrea', 'THODEF1D002', 10, 'monday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Herman', 'THODEF1D003', 11, 'monday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Lawrence', 'THODEF1D004', 12, 'tuesday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Sonya', 'THODEF1D005', 1, 'tuesday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Matt', 'THODEF1D006', 2, 'tuesday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Tony', 'THODEF1D007', 3, 'wednesday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Byron', 'THODEF1D008', 4, 'wednesday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Bob', 'MILLSF1D001', 9, 'monday');
+INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Todd', 'MILLSF1D001', 10, 'monday');

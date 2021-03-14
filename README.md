@@ -8,16 +8,24 @@
 2. `npm start` in the client terminal.
 
 # Database Commands
-1. Login to database: psql -U postgres
-2. List all the databases: \l
-3. Select a database: \c thode
-4. List all the tables in a selected database: \dt
-5. List all the entries in a table: SELECT * FROM tableName;
-6. Create table: CREATE TABLE monday(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), time VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));
-7. Insert entry into table: INSERT INTO monday(host_name, time, student_name, status) VALUES('THODEF1D001', '9', 'Milly', 'Occupied');
-8. Update entries from table: UPDATE wednesday SET student_name='', status='Available' where host_name='THODEF1D001';
-9. Delete entries from table: DELETE FROM thode WHERE student_name='';
-10. Delete table: DROP TABLE monday;
+1. Login to database: `psql -U postgres`
+2. List all the databases: `\l`
+3. Select a database: `\c thode`
+4. List all the tables in a selected database: `\dt`
+5. List all the entries in a table: `SELECT * FROM tableName;`
+6. Create table: `CREATE TABLE monday(workstation_id SERIAL PRIMARY KEY, host_name VARCHAR(30), time VARCHAR(30), student_name VARCHAR(2555), status VARCHAR(30));`
+7. Insert entry into table: `INSERT INTO monday(host_name, time, student_name, status) VALUES('THODEF1D001', '9', 'Milly', 'Occupied');`
+8. Update entries from table: `UPDATE wednesday SET student_name='', status='Available' where host_name='THODEF1D001';`
+9. Delete entries from table: `DELETE FROM thode WHERE student_name='';`
+10. Delete table: `DROP TABLE monday;`
+
+# How to create a copy of the database correctly
+1. Login to your postgres account through the terminal using the `psql -U postgres`
+2. Go to the db.js file, and change the information to match your account, and the name of your database. Keep the same name of the database "lms", short for library management system. Change the username and password in this file to match your postgres acc.
+3. Create a database using command: `CREATE DATABASE lms;`
+4. Connect to that database using command: `\c lms`
+5. Open up the "create_exact_copy_of_database.txt" file, and run all those commands in the terminal. This should make 3 tables and populate them with the sample data I provided. Note that you can just copy and paste it all and all the commands will be run sequentially to create an exact copy of the database. You should have 3 tables called library, usr, and workstation. Check their contents using the database commands I listed above.
+6. We're done! Now start up the client and server, as per the instructions in the "Usage" section above, and it should work.
 
 ## Available Scripts
 
