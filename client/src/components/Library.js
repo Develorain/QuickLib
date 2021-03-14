@@ -11,7 +11,6 @@ export default class Library extends Component {
 
         this.state = {
             items: [],
-            displayedItems: [],
             selectedDay: "none",
             selectedTime: "none",
             selectedStatus: "none",
@@ -62,13 +61,8 @@ export default class Library extends Component {
         }
 
         const address = "http://localhost:5000/gets/getworkstations?reserved="+reserved+"&library_name="+libraryName+"&reservation_time="+reservationTime+"&reservation_day="+reservationDay;
-        // console.log("addr: " + address);
         const response = await fetch(address);
-        // console.log("resp: " + response);
         const items = await response.json();
-        // console.log("itms: " + items);
-        // console.log(address);
-        // console.log(items);
         
         this.setState({items: items});
     }
