@@ -2,8 +2,6 @@ CREATE TABLE library(library_name VARCHAR(30) PRIMARY KEY);
 CREATE TABLE workstation(workstation_name VARCHAR(30) PRIMARY KEY, library_name VARCHAR(30) REFERENCES library (library_name) NOT NULL);
 CREATE TABLE usr(usr_id SERIAL PRIMARY KEY, usr_name VARCHAR(30) NOT NULL, workstation_name VARCHAR(30) REFERENCES workstation (workstation_name), reservation_time INT, reservation_day VARCHAR(30));
 
-
-
 INSERT INTO library(library_name) VALUES('thode');
 INSERT INTO library(library_name) VALUES('mills');
 INSERT INTO library(library_name) VALUES('innis');
@@ -29,6 +27,7 @@ INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) V
 INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Byron', 'THODEF1D008', 4, 'wednesday');
 INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Bob', 'MILLSF1D001', 9, 'monday');
 INSERT INTO usr(usr_name, workstation_name, reservation_time, reservation_day) VALUES('Todd', 'MILLSF1D001', 10, 'monday');
+
 
 Library(_library_name_)
 PK: library_name

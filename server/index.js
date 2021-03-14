@@ -13,19 +13,27 @@ app.use(express.json()); //req.body
 
 // future change: http://localhost:5000/reserve?day=monday&library=thode
 
+// http://localhost:5000/gets/getworkstations?reserved=true&library_name=thode&reservation_time=9&reservation_day=monday
 
-app.get("/posts/getworkstations", async(req, res) => {
-    if (req.query.reserved === "true") {
-        queryStatement = "SELECT workstation_name FROM workstation WHERE library_name='" + req.query.library_name + "' INTERSECT SELECT workstation_name FROM usr WHERE reservation_time=" + req.query.reservation_time + "AND reservation_day='" + req.query.reservation_day + "'";
-        const returnedWorkstations = await pool.query(queryStatement);
-        res.send(returnedWorkstations.rows);
-    } else {
-        queryStatement = "SELECT workstation_name FROM workstation WHERE library_name='" + req.query.library_name + "' EXCEPT SELECT workstation_name FROM usr WHERE reservation_time=" + req.query.reservation_time + "AND reservation_day='" + req.query.reservation_day + "'";
-        // SELECT workstation_name FROM workstation WHERE library_name='thode' EXCEPT SELECT workstation_name FROM usr WHERE reservation_time=9 AND reservation_day='monday';
-        const returnedWorkstations = await pool.query(queryStatement);
-        res.send(returnedWorkstations.rows);
-    }
-    res.send(req.query.library_name);
+app.get("/gets/getworkstations", async(req, res) => {
+    // try {
+        if (req.query.reserved === "true") {
+            queryStatement = "SELECT workstation_name FROM workstation WHERE library_name=\'" + req.query.library_name + "\' INTERSECT SELECT workstation_name FROM usr WHERE reservation_time=" + req.query.reservation_time + "AND reservation_day=\'" + req.query.reservation_day + "\'";
+            const returnedWorkstations = await pool.query(queryStatement);
+            // res.send(returnedWorkstations.rows); //temp
+            res.json(returnedWorkstations.rows);
+        } else {
+            queryStatement = "SELECT workstation_name FROM workstation WHERE library_name=\'" + req.query.library_name + "\' EXCEPT SELECT workstation_name FROM usr WHERE reservation_time=" + req.query.reservation_time + "AND reservation_day=\'" + req.query.reservation_day + "\'";
+            // SELECT workstation_name FROM workstation WHERE library_name='thode' EXCEPT SELECT workstation_name FROM usr WHERE reservation_time=9 AND reservation_day='monday';
+            const returnedWorkstations = await pool.query(queryStatement);
+            // res.send(returnedWorkstations.rows); //temp
+            res.json(returnedWorkstations.rows);
+        }
+    // } catch (e) {
+    //     console.error(e.message);
+    // }
+
+    // res.send(req.query.library_name);
 });
 
 

@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Form} from "react-bootstrap";
+import {Form, Button} from "react-bootstrap";
 
 import 'bootswatch/dist/darkly/bootstrap.min.css';
 
@@ -7,7 +7,7 @@ export default class WorkstationFilterPane extends Component {
     render() {
         return (
             <Fragment>
-                <Form>
+                <Form onSubmit={this.props.handleSubmit}>
                 <Form.Group controlId="exampleForm.SelectCustomSizeLg">
                     <Form.Label>Day</Form.Label>
                     <Form.Control as="select" size="lg" custom defaultValue={this.props.selectedDay} onChange={this.props.handleDay}>
@@ -38,6 +38,10 @@ export default class WorkstationFilterPane extends Component {
                         <option value="Available">Available</option>
                         <option value="Occupied">Occupied</option>
                     </Form.Control>
+
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
                 </Form.Group>
                 </Form>
             </Fragment>

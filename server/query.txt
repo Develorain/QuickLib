@@ -11,6 +11,5 @@ SELECT workstation_name FROM workstation EXCEPT SELECT workstation_name FROM usr
 // this gets all the non-reserved workstations at 9 on monday that belong to thode
 SELECT workstation_name FROM workstation WHERE library_name='thode' EXCEPT SELECT workstation_name FROM usr WHERE reservation_time=9 AND reservation_day='monday';
 
-
 // this gets all the workstations that belong to thode
 SELECT workstation_name FROM workstation WHERE library_name='thode';
