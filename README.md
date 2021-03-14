@@ -21,7 +21,7 @@
 
 # How to create a copy of the database correctly
 1. Login to your postgres account through the terminal using the `psql -U postgres`
-2. Go to the db.js file, and change the information to match your account, and the name of your database. Keep the same name of the database "lms", short for library management system. Change the username and password in this file to match your postgres acc.
+2. Go to the db.js file in the server folder, and change the information to match your account, and the name of your database. Keep the same name of the database "lms", short for library management system. Change the username and password in this file to match your postgres acc.
 3. Create a database using command: `CREATE DATABASE lms;`
 4. Connect to that database using command: `\c lms`
 5. Open up the "create_exact_copy_of_database.txt" file, and run all those commands in the terminal. This should make 3 tables and populate them with the sample data I provided. Note that you can just copy and paste it all and all the commands will be run sequentially to create an exact copy of the database. You should have 3 tables called library, usr, and workstation. Check their contents using the database commands I listed above.
