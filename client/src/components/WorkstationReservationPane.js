@@ -10,32 +10,33 @@ const WorkstationReservationPane = (props) => {
     const handleShow = () => setShow(true);
 
     const reserveWorkstation = async () => {
-        try {
-            const address = "http://localhost:5000/".concat(props.selectedDay);
+        // try {
+        //     const address = "http://localhost:5000/".concat(props.selectedDay);
 
-            // Debug
-            console.log(address);
-            console.log(props.workstationID);
-            console.log(props.hostName);
-            console.log(props.time);
-            console.log(props.reserveName);
-            console.log(props.status);
+        //     // Debug
+        //     // console.log(address);
+        //     // console.log(props.workstationID);
+        //     // console.log(props.hostName);
+        //     // console.log(props.time);
+        //     // console.log(props.reserveName);
+        //     // console.log(props.status);
             
-            const body = {hostName: props.hostName, time: props.time, reserveName: props.reserveName};
-            console.log("BODY ",body); // debug
+        //     const body = {hostName: props.hostName, time: props.time, reserveName: props.reserveName};
+        //     // console.log("BODY ",body); // debug
 
-            handleClose();
+        //     handleClose();
 
-            const response = await fetch(address, {
-                method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(body)
-            });
+        //     const response = await fetch(address, {
+        //         method: "PUT",
+        //         headers: {"Content-Type": "application/json"},
+        //         body: JSON.stringify(body)
+        //     });
 
-            console.log("Response", response); // debug
-        } catch (err) {
-            console.error(err.message);
-        }
+        //     // console.log("Response", response); // debug
+        // } catch (err) {
+        //     console.error(err.message);
+        // }
+        console.log("Workstation Reserved");
     }
     
     return (

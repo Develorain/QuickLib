@@ -14,17 +14,17 @@ export default class Library extends Component {
             selectedDay: "none",
             selectedTime: "none",
             selectedStatus: "none",
-            reserveName: ""
+            selectedName: ""
         };
 
         this.handleDay = this.handleDay.bind(this);
         this.handleTime = this.handleTime.bind(this);
         this.handleStatus = this.handleStatus.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleReserveName = this.handleReserveName.bind(this);
+        this.handleName = this.handleName.bind(this);
     }
 
-    handleReserveName = async e => {
+    handleName = async e => {
         await this.setState({reserveName: e.target.value});
     }
 
@@ -42,27 +42,22 @@ export default class Library extends Component {
 
     handleSubmit = async e => {
         e.preventDefault();
-
-        console.log("SUBMIT CLICKED");
         await this.fetchWorkstations();
     }
     
+    // Sample URL
     // http://localhost:5000/gets/getworkstations?reserved=true&library_name=thode&reservation_time=9&reservation_day=monday
     fetchWorkstations = async () => {
         var libraryName = "thode"; // temporarily hard coded to thode for now for simplicity of implementation
         var reservationDay = this.state.selectedDay;
         var reservationTime = this.state.selectedTime;
-        var reserved;
-
-        if (this.state.selectedStatus === "Available") {
-            reserved = "false";
-        } else {
-            reserved = "true";
-        }
+        var reserved = (this.state.selectedStatus === "Available") ? "false" : "true";
 
         const address = "http://localhost:5000/gets/getworkstations?reserved="+reserved+"&library_name="+libraryName+"&reservation_time="+reservationTime+"&reservation_day="+reservationDay;
         const response = await fetch(address);
         const items = await response.json();
+
+        console.log(items);
         
         this.setState({items: items});
     }
@@ -74,7 +69,7 @@ export default class Library extends Component {
 
                 <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" placeholder="John" onChange={this.handleReserveName}/>
+                    <Form.Control type="text" placeholder="John" onChange={this.handleName}/>
                 </Form.Group>
 
                 <WorkstationFilterPane handleDay={this.handleDay} handleTime={this.handleTime} handleStatus={this.handleStatus} handleSubmit={this.handleSubmit}
@@ -82,7 +77,10 @@ export default class Library extends Component {
                 
                 {this.state.items.map(item => (
                     <div key={item.workstation_name}>
-                        <Workstation workstationName={item.workstation_name}/>
+                        <Workstation workstationName={item.workstation_name}
+                            selectedName={this.state.selectedName}
+                            selectedDay={this.state.selectedDay}
+                            selectedTime={this.state.selectedTime}/>
                     </div>
                 ))}
             </Fragment>
