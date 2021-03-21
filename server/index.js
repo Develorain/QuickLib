@@ -7,37 +7,27 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json()); //req.body
 
-//new
-//const postsRoute = require("./routes/posts");
-//app.use("/posts", postsRoute);
+/// Database Routes ///
 
-// future change: http://localhost:5000/reserve?day=monday&library=thode
-
+// Sample URL
 // http://localhost:5000/gets/getworkstations?reserved=true&library_name=thode&reservation_time=9&reservation_day=monday
-
 app.get("/gets/getworkstations", async(req, res) => {
-    // try {
+    try {
         if (req.query.reserved === "true") {
             queryStatement = "SELECT workstation_name FROM workstation WHERE library_name=\'" + req.query.library_name + "\' INTERSECT SELECT workstation_name FROM usr WHERE reservation_time=" + req.query.reservation_time + "AND reservation_day=\'" + req.query.reservation_day + "\'";
             const returnedWorkstations = await pool.query(queryStatement);
-            // res.send(returnedWorkstations.rows); //temp
             res.json(returnedWorkstations.rows);
         } else {
             queryStatement = "SELECT workstation_name FROM workstation WHERE library_name=\'" + req.query.library_name + "\' EXCEPT SELECT workstation_name FROM usr WHERE reservation_time=" + req.query.reservation_time + "AND reservation_day=\'" + req.query.reservation_day + "\'";
-            // SELECT workstation_name FROM workstation WHERE library_name='thode' EXCEPT SELECT workstation_name FROM usr WHERE reservation_time=9 AND reservation_day='monday';
             const returnedWorkstations = await pool.query(queryStatement);
-            // res.send(returnedWorkstations.rows); //temp
             res.json(returnedWorkstations.rows);
         }
-    // } catch (e) {
-    //     console.error(e.message);
-    // }
-
-    // res.send(req.query.library_name);
+    } catch (e) {
+        console.error(e.message);
+    }
 });
 
 
-/// Database Routes ///
 // THODE //
 // Get all the workstations from Thode for any day
 app.get("/:var(monday|tuesday|wednesday|thursday|friday)", async(req, res) => {
@@ -96,6 +86,9 @@ app.get("/students", async(req, res) => {
     }
 });
 
+app.listen(5000, () => {
+    console.log("server has started on port 5000");
+})
 
 // Create a workstation at Thode (incomplete)
 /*
@@ -139,7 +132,3 @@ app.get("/students/:id", async(req, res) => {
     }
 });
 */
-
-app.listen(5000, () => {
-    console.log("server has started on port 5000");
-})
