@@ -1,7 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, Form, FormControl, NavDropdown } from 'react-bootstrap';
 import styled from 'styled-components';
-import logo from './img/logo.svg';
 const Styles = styled.div`
   .navbar { background-color: #7A003C; }
   .nav-link {
