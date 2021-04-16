@@ -84,7 +84,7 @@ const NavigationBar = () => (
         </Nav>
       </Navbar.Collapse>
       <Form className="form-center" >
-        <FormControl type="text" placeholder="Type here" className="" onChange={clickSignOut} value="" />
+        <FormControl type="text" placeholder="Type here" className="" value="" />
       </Form>
     </Navbar>
   </Styles>
