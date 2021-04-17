@@ -34,12 +34,15 @@ class Booking extends React.Component {
     componentWillMount() {
         let selected = '';
         let selectedM = '';
-        if (localStorage && localStorage.getItem('select') && localStorage.getItem('selectM')) {
+        let selectedE = '';
+        if (localStorage && localStorage.getItem('select') && localStorage.getItem('selectM') && localStorage.getItem('email')) {
             selected = JSON.parse(localStorage.getItem('select'));
             selectedM = JSON.parse(localStorage.getItem('selectM'));
+            selectedE = JSON.parse(localStorage.getItem('email'));
           }
          this.setState({ID: selected})
          this.setState({Location: selectedM})
+         this.setState({email: selectedE})
 
     }
     handleChange(e) {
@@ -62,8 +65,7 @@ class Booking extends React.Component {
         }, 2000)
         localStorage.setItem('name',
                 JSON.stringify(this.state.name));
-        localStorage.setItem('email',
-                JSON.stringify(this.state.email));
+        //localStorage.setItem('email',JSON.stringify(this.state.email));
         alert('Submit successfully!\nA confirmation email has been sent to '+this.state.email+'!');
     }
     renderSeat = () => {
@@ -120,7 +122,7 @@ class Booking extends React.Component {
                             <img className='icon' src={emailIcon} alt='Emial Icon' />
                             <label className = 'Blabel' htmlFor='email' style={{padding:'10px',fontSize:'18px'}}>Email:</label>
                             <input type="email" id="emailBox"
-                                onChange={this.handleChange2} style={{fontSize:'16px'}}/>
+                                value={this.state.email} style={{fontSize:'16px'}}/>
                         </div>
 
                     </div>

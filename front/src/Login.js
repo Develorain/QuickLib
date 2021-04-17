@@ -29,6 +29,8 @@ class Login extends Component {
     else{
       this.setState({ modalIsOpen: false });
       this.setState({ sign: this.state.name });
+      localStorage.setItem('email',
+                JSON.stringify(this.state.name));
       this.setState({ isDisabled: true });
     }
   }
