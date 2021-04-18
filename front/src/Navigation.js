@@ -71,7 +71,7 @@ const NavigationBar = () => (
           <Nav.Item><Nav.Link href="/SettingPage" >Setting</Nav.Link></Nav.Item>
           <Nav.Item><Nav.Link href="/SupportPage" >Support</Nav.Link></Nav.Item>
           
-          <NavDropdown title="Test User" id="basic-nav-dropdown" >
+          <NavDropdown title="User" id="basic-nav-dropdown" >
             <NavDropdown.Item className='itemU' style={{ color: "black" }}>
               <Login />
             </NavDropdown.Item>
